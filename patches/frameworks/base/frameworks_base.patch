@@ -1,0 +1,43 @@
+From 875c8fc7844650013b3c3b8cba4992861c3b5a36 Mon Sep 17 00:00:00 2001
+From: DarkKnight6499 <yazad.madan@gmail.com>
+Date: Mon, 19 Dec 2016 03:09:51 +0000
+Subject: [PATCH] MediaTek: the improving & fixing of hwui crashing
+
+---
+ libs/hwui/Caches.cpp | 13 +++++++++----
+ 1 file changed, 9 insertions(+), 4 deletions(-)
+
+diff --git a/libs/hwui/Caches.cpp b/libs/hwui/Caches.cpp
+index a8ced9b..6a25466 100644
+--- a/libs/hwui/Caches.cpp
++++ b/libs/hwui/Caches.cpp
+@@ -83,16 +83,21 @@ bool Caches::init() {
+ }
+ 
+ void Caches::initExtensions() {
++#ifndef MTK_HARDWARE
+     if (mExtensions.hasDebugMarker()) {
+         eventMark = glInsertEventMarkerEXT;
+-
+         startMark = glPushGroupMarkerEXT;
+         endMark = glPopGroupMarkerEXT;
+     } else {
+-        eventMark = eventMarkNull;
+-        startMark = startMarkNull;
+-        endMark = endMarkNull;
++         eventMark = eventMarkNull;
++         startMark = startMarkNull;
++         endMark = endMarkNull;
+     }
++#else
++         eventMark = eventMarkNull;
++         startMark = startMarkNull;
++         endMark = endMarkNull;
++#endif
+ }
+ 
+ void Caches::initConstraints() {
+-- 
+2.7.4.1.g5468f9e
+
+
