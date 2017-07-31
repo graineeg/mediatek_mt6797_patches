@@ -1,0 +1,1 @@
+# mediatek_mt6797_patches
